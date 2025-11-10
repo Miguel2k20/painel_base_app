@@ -10,11 +10,9 @@
 </template>
 <script>
 import EditProfileForm from "./Profile/EditProfileForm";
-import UserCard from "./Profile/UserCard";
 export default {
   components: {
     EditProfileForm,
-    UserCard,
   },
   data() {
     return {

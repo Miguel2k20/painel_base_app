@@ -4,15 +4,15 @@
       <template slot="links">
         <sidebar-link
           to="/dashboard"
-          :name="$t('sidebar.dashboard')"
+          name="Boas Vindas"
           icon="tim-icons icon-chart-pie-36"
         />
         <sidebar-link
-          to="/icons"
-          :name="$t('sidebar.icons')"
-          icon="tim-icons icon-atom"
+          to="/users"
+          name="Colaboradores"
+          icon="tim-icons icon-single-02"
         />
-        <sidebar-link
+        <!-- <sidebar-link
           to="/maps"
           :name="$t('sidebar.maps')"
           icon="tim-icons icon-pin"
@@ -41,7 +41,7 @@
           to="/dashboard?enableRTL=true"
           :name="$t('sidebar.rtlSupport')"
           icon="tim-icons icon-world"
-        />
+        /> -->
       </template>
     </side-bar>
     <div class="main-panel">

@@ -5,8 +5,7 @@ import NotFound from "@/pages/NotFoundPage.vue";
 // Admin pages
 const Dashboard = () =>
   import(/* webpackChunkName: "dashboard" */ "@/pages/Dashboard.vue");
-const Profile = () =>
-  import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
+const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
 const Notifications = () =>
   import(/* webpackChunkName: "common" */ "@/pages/Notifications.vue");
 const Icons = () =>
@@ -17,6 +16,11 @@ const Typography = () =>
 const TableList = () =>
   import(/* webpackChunkName: "common" */ "@/pages/TableList.vue");
 
+const Welcome = () => import("@/pages/Welcome/index.vue");
+const UserList = () => import("@/pages/Users/List");
+const UserForm = () => import("@/pages/Users/Form");
+const Login = () => import("@/pages/Login");
+
 const routes = [
   {
     path: "/",
@@ -24,9 +28,29 @@ const routes = [
     redirect: "/dashboard",
     children: [
       {
+        path: "/login",
+        name: "Login",
+        component: Login
+      },
+      {
         path: "dashboard",
-        name: "dashboard",
-        component: Dashboard,
+        name: "Boas Vindas",
+        component: Welcome,
+      },
+      {
+        path: "users",
+        name: "Colaboradores",
+        component: UserList,
+      },
+      {
+        path: "users/create",
+        name: "Novo Colaborador",
+        component: UserForm,
+      },
+      {
+        path: "users/edit/:id",
+        name: "Editar Colaborador",
+        component: UserForm,
       },
       {
         path: "profile",
