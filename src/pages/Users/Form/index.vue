@@ -9,6 +9,7 @@
 <script>
 import FormUser from "./components/FormUser.vue";
 import axios from "axios";
+import { getUser } from "@/services/routesApi/users";
 
 export default {
   components: { FormUser },
@@ -19,14 +20,15 @@ export default {
   },
   async created() {
     const id = this.$route.params.id;
-    if (id) {
-      try {
-        const response = await axios.get(`http://localhost:3000/users/${id}`);
+    this.fetchUser(3);
+  },
+  methods: {
+    fetchUser(id){
+      getUser(id).then(response => {
         console.log(response.data);
-        // this.model = response.data;
-      } catch (error) {
+      }).catch(error => {
         console.error("Erro ao buscar usuário:", error);
-      }
+      });
     }
   },
 };
