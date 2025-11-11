@@ -15,12 +15,12 @@ export default {
   components: { FormUser },
   data() {
     return {
-      model: {}, // modelo inicial vazio
+      model: {}, 
     };
   },
   async created() {
-    const id = this.$route.params.id;
-    this.fetchUser(3);
+    const id = this.$route.params.id ?? null;
+    if(id) this.fetchUser(id);
   },
   methods: {
     fetchUser(id){

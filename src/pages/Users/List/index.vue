@@ -18,27 +18,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>João Miguel Mendonça</td>
-                        <td>teste@teste.com</td>
+                    <tr v-for="user in userList" :key="user.id">
+                        <th scope="row">{{ user.id }}</th>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
                         <td class="d-flex">
-                            <button class="btn btn-primary mr-3"><i class="tim-icons icon-pencil"></i></button>
-                            <button class="btn btn-danger"><i class="tim-icons icon-trash-simple"></i></button>
+                            <a :href="`/users/edit/${user.id}`" class="btn btn-primary mr-3"><i class="tim-icons icon-pencil"></i></a>
+                            <button @click="deleteUser(user.id)" class="btn btn-danger"><i class="tim-icons icon-trash-simple"></i></button>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Clara Haag</td>
-                        <td>teste@teste222222.com</td>
-                        <td class="d-flex">
-                            <a href="/users/edit/1" class="btn btn-primary mr-3"><i class="tim-icons icon-pencil"></i></a>
-                            <button class="btn btn-danger"><i class="tim-icons icon-trash-simple"></i></button>
-                        </td>
-                    </tr>
+                    
                     
                 </tbody>
             </table>
         </div>
     </div>
 </template>
+
+<script>
+import { getUsers, deleteUser } from '@/services/routesApi/users';
+export default {
+  name: "UserList",
+  data(){
+    return {
+        userList: []
+    }
+  },
+  methods: {
+    fetchUsers(){
+        getUsers().then(response => {
+            this.userList = response.data.users;
+        }).catch(error => {
+            console.error("Erro ao buscar usuários:", error);
+        });
+    },
+    deleteUser(id){
+        deleteUser(id).then(() => {
+            this.userList = this.userList.filter(user => user.id !== id);
+        }).catch(error => {
+            console.error("Erro ao deletar usuário:", error);
+        });
+    }
+  },
+  created(){
+    this.fetchUsers();
+  }
+};
+
+</script>
